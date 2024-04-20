@@ -6,21 +6,21 @@ import { toast } from 'react-toastify';
 import customFetch from '../../../utils/customFetch';
 
 export const action = async ({ request }) => {
- const formData = await request.formData();
- const data = Object.fromEntries(formData)
- console.log( data)
-try {
-  await customFetch.post('auth/register',data)
-  toast.success('Registration successful')
-  return redirect('/login')
-} catch (error) {
-  toast.error(error?.response?.data?.msg)
-  return error;
-}
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData)
+  console.log(data)
+  try {
+    await customFetch.post('auth/register', data)
+    toast.success('Registration successful')
+    return redirect('/login')
+  } catch (error) {
+    toast.error(error?.response?.data?.msg)
+    return error;
+  }
 }
 const Register = () => {
   const navigation = useNavigation()
- 
+
   const isSubmitting = navigation.state === 'submitting'
   return (
     <Wrapper>
@@ -32,8 +32,8 @@ const Register = () => {
         <FormRow type="text" name="location" placeholder="Address" labelText="Location" />
         <FormRow type="email" name="email" placeholder="Abc@xyz.com" labelText="Email" />
         <FormRow type="password" name="password" placeholder="Secret@123" labelText="Password" />
-        <button type='submit' className='btn btn-block'>submit</button>
-        {isSubmitting ? 'submiting...' : 'submit'}
+        <button type='submit' className='btn btn-block'> {isSubmitting ? 'submiting...' : 'submit'}</button>
+
         <p> Already a member?
           <Link to='/login' className='member-btn' >Login</Link>
         </p>
