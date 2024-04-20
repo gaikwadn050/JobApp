@@ -6394,7 +6394,7 @@ const Stats = () => {
   );
 };
 export default Stats;
-```
+```  
 
 ```js
 const data = useQuery({

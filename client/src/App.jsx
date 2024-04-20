@@ -12,8 +12,19 @@ import {
   AllJobs,
   Profile,
   Admin,
+  EditJob,
 } from './pages'
 import { action as registerAction } from './pages/Register'
+import { action as loginAction } from './pages/Login'
+import { action as AddJobAction } from './pages/AddJob'
+import { loader as dashboardLoader } from './pages/DashboardLayout'
+import { loader as AllJobLoader } from "./pages/AllJobs"
+import { loader as EditLoader } from "./pages/EditJob"
+import { action as EditAction } from "./pages/EditJob"
+import { action as deleteAction } from "./pages/DeleteJob"
+import { loader as adminAction } from "./pages/Admin"
+import { action as profileAction } from "./pages/Profile"
+import { loader as statsLoader } from "./pages/Stats"
 
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem('darkTheme') === 'true'
@@ -42,29 +53,46 @@ const router = createBrowserRouter(
         {
           path: 'login',
           element: <Login />,
+          action: loginAction,
         },
         {
           path: 'dashboard',
           element: <DashboardLayout />,
+          loader: dashboardLoader,
           children: [
             {
               index: true,
-              element: <AddJob />
+              element: <AddJob />,
+              action: AddJobAction
             },
             {
               path: 'all-jobs',
-              element: <AllJobs />
+              element: <AllJobs />,
+              loader: AllJobLoader
+            },
+            {
+              path: 'edit-job/:id',
+              element: <EditJob />,
+              loader: EditLoader,
+              action: EditAction
+            },
+            {
+              path: 'delete-job/:id',
+              action: deleteAction
             },
             {
               path: 'profile',
-              element: <Profile />
+              element: <Profile />,
+              action: profileAction
             },
             {
               path: 'admin',
-              element: <Admin />
+              element: <Admin />,
+              loader: adminAction
             }, {
               path: 'stats',
-              element: <Stats />
+              element: <Stats />,
+              loader: statsLoader
             }
           ]
         },
